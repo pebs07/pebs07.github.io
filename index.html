@@ -204,10 +204,23 @@
     background: #0f0f0f;
     padding: 48px;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 300px 1fr;
     gap: 48px;
     transition: background 0.3s ease;
     cursor: default;
+  }
+
+  .case-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .case-image img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .case:hover {
@@ -725,7 +738,7 @@
   <div class="hero-contact">
     <div>febriantomulyawan91@gmail.com</div>
     <div>+62 812 9198 5208</div>
-    <div><a href="https://www.linkedin.com/in/febrianto-mulyawan" target="_blank">LinkedIn ↗</a></div>
+    <div><a href="https://www.linkedin.com/in/febrianto-mulyawan-a58299a7/" target="_blank">LinkedIn ↗</a></div>
   </div>
 </section>
 
@@ -738,7 +751,9 @@
 
     <!-- Case 1 -->
     <div class="case reveal">
-      <div class="case-num">01</div>
+      <div class="case-image">
+        <img src="case-campaign.png" alt="Campaign for Good Case Study">
+      </div>
       <div>
         <div class="case-tag">SaaS Platform · Campaign for Good</div>
         <h3>Scaling a Regional Digital Platform to Serve Millions</h3>
@@ -779,7 +794,9 @@
 
     <!-- Case 2 -->
     <div class="case reveal">
-      <div class="case-num">02</div>
+      <div class="case-image">
+        <img src="case-backlog-buddy.png" alt="Backlog Buddy Case Study">
+      </div>
       <div>
         <div class="case-tag">AI Product · Atlassian Forge</div>
         <h3>Building Backlog Buddy — AI-Powered Jira Health Tool</h3>
@@ -820,7 +837,9 @@
 
     <!-- Case 3 -->
     <div class="case reveal">
-      <div class="case-num">03</div>
+      <div class="case-image">
+        <img src="case-products.png" alt="Digital Products Case Study">
+      </div>
       <div>
         <div class="case-tag">Digital Products · Gumroad</div>
         <h3>Launching a PM Digital Product Suite (3 Products, $0 Budget)</h3>
