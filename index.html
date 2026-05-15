@@ -703,13 +703,81 @@
     transform: translateY(0);
   }
 
+  /* MOBILE SCROLL INDICATOR */
+  @media (max-width: 768px) {
+    .cases::after,
+    .logos-grid::after,
+    .products-grid::after {
+      content: "← Swipe →";
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero, section, footer { padding: 48px 24px; }
     .hero-stats { gap: 24px; flex-wrap: wrap; }
-    .case { grid-template-columns: 1fr; }
+    
+    /* CASE STUDIES SLIDER */
+    .cases {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 24px;
+      padding-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .case {
+      flex: 0 0 calc(100vw - 48px);
+      scroll-snap-align: start;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 32px;
+    }
+    
+    .case-image {
+      width: 100%;
+      height: 250px;
+    }
+    
+    /* LOGOS GRID SLIDER */
+    .logos-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .logo-card {
+      flex: 0 0 calc(50vw - 32px);
+      scroll-snap-align: start;
+    }
+    
+    /* PRODUCTS GRID SLIDER */
+    .products-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .product-card {
+      flex: 0 0 calc(100vw - 48px);
+      scroll-snap-align: start;
+    }
+    
     .skills-grid { grid-template-columns: 1fr; }
-    .products-grid { grid-template-columns: 1fr; }
     .detail-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 32px; }
     .hero::before { font-size: 120px; right: -10px; }
