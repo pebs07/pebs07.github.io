@@ -3,18 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Febrianto Mulyawan — Product Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Febrianto Mulyawan — Product Manager Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ee;
+    --accent: #c8722a;
+    --accent2: #2a5c8a;
+    --gray: #6b6b6b;
+    --light: #e8e4df;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #ffffff;
-    color: #1a1a1a;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
     overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.1);
+  }
+
+  [data-theme="light"] {
+    --black: #ffffff;
+    --white: #1a1a1a;
+    --gray: #555555;
+    --light: #f0f0f0;
+  }
+
+  [data-theme="light"] .theme-toggle {
+    background: rgba(0,0,0,0.08);
+    border-color: rgba(0,0,0,0.15);
   }
 
   /* HERO */
@@ -23,162 +69,177 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 80px 40px;
-    text-align: center;
-    background: linear-gradient(135deg, #f8f7f5 0%, #ffffff 100%);
+    padding: 80px 60px;
+    position: relative;
+    border-bottom: 1px solid #1f1f1f;
   }
 
-  .avatar {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2a5c8a 0%, #c8722a 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 32px;
-    font-size: 72px;
-    color: white;
-    font-weight: 600;
+  .hero::before {
+    content: '';
+    display: none;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease forwards;
   }
 
   .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 8vw, 72px);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
     font-weight: 700;
-    margin-bottom: 16px;
-    line-height: 1.1;
+    line-height: 1;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.8s ease 0.1s both;
   }
 
-  .hero .title {
-    font-size: 20px;
-    color: #666;
-    margin-bottom: 24px;
-    font-weight: 500;
+  .hero h1 span {
+    color: var(--accent);
   }
 
-  .hero .subtitle {
-    max-width: 600px;
-    font-size: 18px;
-    color: #888;
+  .hero-sub {
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--gray);
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    font-size: 16px;
+    color: #aaa;
     margin-bottom: 48px;
-    line-height: 1.7;
+    animation: fadeUp 0.8s ease 0.3s both;
   }
 
   .hero-stats {
     display: flex;
     gap: 48px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.4s both;
   }
 
   .stat {
-    text-align: center;
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
   }
 
   .stat-num {
+    font-family: 'Playfair Display', serif;
     font-size: 36px;
-    font-weight: 600;
-    color: #2a5c8a;
-    display: block;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
   }
 
   .stat-label {
-    font-size: 13px;
-    color: #999;
+    font-size: 12px;
+    color: var(--gray);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-top: 4px;
   }
 
-  .cta-button {
-    display: inline-block;
-    padding: 14px 32px;
-    background: #2a5c8a;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 2px solid #2a5c8a;
+  .hero-contact {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    text-align: right;
+    font-size: 13px;
+    color: var(--gray);
+    animation: fadeUp 0.8s ease 0.5s both;
   }
 
-  .cta-button:hover {
-    background: #1e4563;
-    border-color: #1e4563;
+  .hero-contact a {
+    color: var(--accent);
+    text-decoration: none;
   }
 
   /* SECTION */
   section {
-    padding: 80px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 80px 60px;
+    border-bottom: 1px solid #1f1f1f;
   }
 
   .section-label {
-    font-size: 12px;
-    letter-spacing: 2px;
+    font-size: 11px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: #c8722a;
-    margin-bottom: 24px;
-    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1f1f1f;
+    max-width: 200px;
   }
 
   .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(32px, 5vw, 56px);
     font-weight: 700;
     margin-bottom: 48px;
-    color: #1a1a1a;
-  }
-
-  /* CLIENTS GRID */
-  .clients-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-    margin-bottom: 80px;
-  }
-
-  .client-card {
-    padding: 32px 24px;
-    background: #f8f7f5;
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid #e8e4df;
-  }
-
-  .client-card:hover {
-    background: #f0ede8;
-    border-color: #d9d1ca;
-  }
-
-  .client-card .name {
-    font-size: 16px;
-    font-weight: 500;
-    color: #1a1a1a;
-    line-height: 1.5;
-  }
-
-  .client-card .type {
-    font-size: 12px;
-    color: #999;
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    line-height: 1.1;
   }
 
   /* CASE STUDIES */
+  .cases {
+    display: grid;
+    gap: 2px;
+  }
+
   .case {
-    background: #f8f7f5;
+    background: #0f0f0f;
     padding: 48px;
-    margin-bottom: 32px;
-    border-radius: 8px;
-    border: 1px solid #e8e4df;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+
+  .case:hover {
+    background: #151515;
+  }
+
+  [data-theme="light"] .case {
+    background: #f8f8f8;
+  }
+
+  [data-theme="light"] .case:hover {
+    background: #f0f0f0;
+  }
+
+  .case-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: #1f1f1f;
+    line-height: 1;
+  }
+
+  [data-theme="light"] .case-num {
+    color: #e0e0e0;
+  }
+
+  .case-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
   }
 
   .case h3 {
@@ -186,80 +247,329 @@
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 16px;
-    color: #1a1a1a;
+    line-height: 1.2;
   }
 
-  .case .tag {
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #c8722a;
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-
-  .case p {
-    font-size: 16px;
-    color: #666;
+  .case-desc {
+    color: #aaa;
+    font-size: 15px;
     margin-bottom: 24px;
-    line-height: 1.7;
   }
 
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 16px;
+  .case-metrics {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
   }
 
   .metric {
-    background: white;
-    padding: 16px;
-    border-radius: 6px;
-    border-left: 3px solid #c8722a;
+    background: #1a1a1a;
+    padding: 16px 24px;
+    border-left: 2px solid var(--accent);
+  }
+
+  [data-theme="light"] .metric {
+    background: #f0f0f0;
+    border-left-color: var(--accent);
   }
 
   .metric-val {
-    font-size: 24px;
-    font-weight: 600;
-    color: #2a5c8a;
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
     line-height: 1;
   }
 
   .metric-label {
-    font-size: 12px;
-    color: #999;
+    font-size: 11px;
+    color: var(--gray);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 6px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  [data-theme="light"] .metric-label {
+    color: #888;
+  }
+
+  .case-detail {
+    display: none;
+    margin-top: 24px;
+  }
+
+  .case-detail.open {
+    display: block;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 24px;
+  }
+
+  .detail-box {
+    background: #1a1a1a;
+    padding: 24px;
+  }
+
+  .detail-box h4 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .detail-box p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  /* LOGOS GRID */
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2px;
+  }
+
+  .logo-card {
+    background: #1a1a1a;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.logo-card:hover {
+    background: #222;
+    text-decoration: none;
+  }
+
+  .logo-card:hover {
+    background: #222;
+  }
+
+  [data-theme="light"] .logo-card {
+    background: #f8f8f8;
+    border-color: #e0e0e0;
+  }
+
+  [data-theme="light"] .logo-card:hover {
+    background: #f0f0f0;
+  }
+
+  .logo-placeholder {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 12px;
+  }
+
+  .logo-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  [data-theme="light"] .logo-name {
+    color: var(--white);
+  }
+
+  @media (max-width: 768px) {
+    .logos-grid {
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    }
+    .logo-card {
+      min-height: 120px;
+      padding: 24px 16px;
+    }
+    .logo-placeholder {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+  }
+
+
+  .toggle-btn {
+    background: none;
+    border: 1px solid #333;
+    color: var(--gray);
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .toggle-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   /* SKILLS */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
   }
 
-  .skill-group h3 {
-    font-size: 18px;
-    font-weight: 600;
+  .skill-box {
+    background: #0f0f0f;
+    padding: 40px;
+    transition: background 0.3s ease;
+  }
+
+  .skill-box:hover {
+    background: #151515;
+  }
+
+  [data-theme="light"] .skill-box {
+    background: #f8f8f8;
+  }
+
+  [data-theme="light"] .skill-box:hover {
+    background: #f0f0f0;
+  }
+
+  .skill-box h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
     margin-bottom: 16px;
-    color: #1a1a1a;
-  }
-
-  .skill-list {
-    list-style: none;
   }
 
   .skill-list li {
-    font-size: 15px;
-    color: #666;
-    padding: 8px 0;
-    border-bottom: 1px solid #e8e4df;
+    font-size: 14px;
+    color: var(--gray);
+    padding: 6px 0;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .skill-list li:last-child {
-    border-bottom: none;
+  [data-theme="light"] .skill-list li {
+    color: #666;
+    border-bottom-color: #e0e0e0;
+  }
+
+  .skill-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 12px;
+  }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .product-card {
+    background: #0f0f0f;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.product-card:hover {
+    background: #151515;
+    text-decoration: none;
+  }
+
+  .product-card:hover {
+    background: #151515;
+  }
+
+  [data-theme="light"] .product-card {
+    background: #f8f8f8;
+  }
+
+  [data-theme="light"] .product-card:hover {
+    background: #f0f0f0;
+  }
+
+  .product-card::before {
+    content: attr(data-letter);
+    position: absolute;
+    right: -10px;
+    bottom: -20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: #151515;
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+
+  [data-theme="light"] .product-card::before {
+    color: #f0f0f0;
+  }
+
+  .product-card:hover::before {
+    color: #1a1a1a;
+  }
+
+  [data-theme="light"] .product-card:hover::before {
+    color: #e0e0e0;
+  }
+
+  .product-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .product-card p {
+    font-size: 15px;
+    color: #aaa;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  [data-theme="light"] .product-card p {
+    color: #666;
+  }
+
+  .product-badge {
+    display: inline-block;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--gray);
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  [data-theme="light"] .product-badge {
+    background: #f0f0f0;
+    border-color: #e0e0e0;
   }
 
   /* TIMELINE */
@@ -274,94 +584,86 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: #e8e4df;
+    width: 1px;
+    background: #1f1f1f;
   }
 
   .timeline-item {
     position: relative;
-    padding-bottom: 40px;
+    padding-bottom: 48px;
   }
 
   .timeline-item::before {
     content: '';
     position: absolute;
-    left: -46px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    background: #c8722a;
+    left: -44px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
     border-radius: 50%;
   }
 
   .timeline-date {
     font-size: 12px;
-    color: #c8722a;
-    letter-spacing: 1px;
+    color: var(--accent);
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 6px;
-    font-weight: 600;
+    margin-bottom: 8px;
   }
 
   .timeline-item h3 {
-    font-size: 20px;
-    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
     margin-bottom: 4px;
-    color: #1a1a1a;
   }
 
   .timeline-company {
     font-size: 14px;
-    color: #999;
+    color: var(--gray);
     margin-bottom: 12px;
   }
 
   .timeline-desc {
     font-size: 15px;
-    color: #666;
+    color: #aaa;
     max-width: 600px;
-    line-height: 1.7;
   }
 
   /* FOOTER */
   footer {
-    background: #1a1a1a;
-    color: white;
-    padding: 60px 40px;
-    text-align: center;
+    padding: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   footer h2 {
     font-family: 'Playfair Display', serif;
     font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 32px;
+    font-weight: 900;
+  }
+
+  footer h2 span {
+    color: var(--accent);
   }
 
   .footer-links {
     display: flex;
     gap: 32px;
-    justify-content: center;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
   }
 
   .footer-links a {
-    color: #aaa;
+    color: var(--gray);
     text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 13px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     transition: color 0.3s ease;
   }
 
   .footer-links a:hover {
-    color: #c8722a;
-  }
-
-  footer p {
-    font-size: 13px;
-    color: #666;
+    color: var(--accent);
   }
 
   /* ANIMATIONS */
@@ -372,25 +674,25 @@
 
   .reveal {
     opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .reveal:nth-child(1) { animation-delay: 0.1s; }
-  .reveal:nth-child(2) { animation-delay: 0.2s; }
-  .reveal:nth-child(3) { animation-delay: 0.3s; }
-  .reveal:nth-child(4) { animation-delay: 0.4s; }
-  .reveal:nth-child(5) { animation-delay: 0.5s; }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .hero { padding: 60px 24px; }
-    section { padding: 60px 24px; }
-    .avatar { width: 120px; height: 120px; font-size: 56px; }
-    .hero h1 { font-size: 36px; }
-    .case { padding: 32px 24px; }
-    .clients-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+    .hero, section, footer { padding: 48px 24px; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .case { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 32px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 32px; }
+    .hero::before { font-size: 120px; right: -10px; }
   }
 </style>
 </head>
@@ -398,185 +700,323 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="avatar reveal">FM</div>
-  <h1 class="reveal">Febrianto<br>Mulyawan</h1>
-  <div class="title reveal">Senior Product Manager</div>
-  <p class="subtitle reveal">10+ years shipping digital products that matter. Specialized in SaaS platforms, AI-driven features, and cross-functional execution across Southeast Asia.</p>
+  <div class="hero-tag">Product Manager · Bandung, Indonesia</div>
+  <h1>Febrianto<br><span>Mulyawan</span></h1>
+  <div class="hero-sub">10+ Years Building Digital Products</div>
+  <p class="hero-desc">Senior PM bridging business strategy and technical execution. Specializing in SaaS platforms, AI-powered tools, and cross-functional delivery across Southeast Asia.</p>
   <div class="hero-stats">
-    <div class="stat reveal">
-      <span class="stat-num">10+</span>
-      <span class="stat-label">Years Experience</span>
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years Experience</div>
     </div>
-    <div class="stat reveal">
-      <span class="stat-num">40%</span>
-      <span class="stat-label">Retention Lift</span>
+    <div class="stat">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">User Retention Lift</div>
     </div>
-    <div class="stat reveal">
-      <span class="stat-num">70%</span>
-      <span class="stat-label">Velocity Gain</span>
+    <div class="stat">
+      <div class="stat-num">70%</div>
+      <div class="stat-label">Velocity Improvement</div>
     </div>
-    <div class="stat reveal">
-      <span class="stat-num">95%</span>
-      <span class="stat-label">On-Time Delivery</span>
+    <div class="stat">
+      <div class="stat-num">95%</div>
+      <div class="stat-label">On-time Delivery</div>
     </div>
   </div>
-  <a href="#work" class="cta-button reveal">View my work</a>
-</section>
-
-<!-- CLIENTS -->
-<section id="clients">
-  <div class="section-label reveal">Organizations</div>
-  <h2 class="section-title reveal">Companies I've worked with</h2>
-  <div class="clients-grid">
-    <div class="client-card reveal">
-      <div class="name">Campaign for Good</div>
-      <div class="type">SaaS Platform</div>
-    </div>
-    <div class="client-card reveal">
-      <div class="name">Lembaga Sensor Film</div>
-      <div class="type">Digital Services</div>
-    </div>
-    <div class="client-card reveal">
-      <div class="name">Wunderman Thompson</div>
-      <div class="type">Digital Agency</div>
-    </div>
-    <div class="client-card reveal">
-      <div class="name">BPJS Ketenagakerjaan</div>
-      <div class="type">Government</div>
-    </div>
-    <div class="client-card reveal">
-      <div class="name">BRI Mobile</div>
-      <div class="type">Financial Services</div>
-    </div>
+  <div class="hero-contact">
+    <div>febriantomulyawan91@gmail.com</div>
+    <div>+62 812 9198 5208</div>
+    <div><a href="https://www.linkedin.com/in/febrianto-mulyawan" target="_blank">LinkedIn ↗</a></div>
   </div>
 </section>
 
 <!-- CASE STUDIES -->
-<section id="work">
-  <div class="section-label reveal">Case Studies</div>
-  <h2 class="section-title reveal">Selected work</h2>
+<section>
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title reveal">Case Studies</h2>
 
-  <div class="case reveal">
-    <div class="tag">SaaS Platform · Campaign for Good</div>
-    <h3>Scaling a Regional Platform Serving Millions</h3>
-    <p>Led end-to-end product delivery for a multi-platform SaaS (Web, Admin, iOS/Android) serving millions of users across Indonesia and Southeast Asia. Coordinated cross-functional squad of 10 across product, data, and engineering to accelerate delivery without sacrificing quality.</p>
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-val">40%</div>
-        <div class="metric-label">User Retention</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val">70%</div>
-        <div class="metric-label">Team Velocity</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val">95%</div>
-        <div class="metric-label">On-Time Rate</div>
+  <div class="cases">
+
+    <!-- Case 1 -->
+    <div class="case reveal">
+      <div class="case-num">01</div>
+      <div>
+        <div class="case-tag">SaaS Platform · Campaign for Good</div>
+        <h3>Scaling a Regional Digital Platform to Serve Millions</h3>
+        <p class="case-desc">Led end-to-end product delivery for a multi-platform SaaS (Web, Admin, iOS/Android) serving millions of users across Indonesia and Southeast Asia. Coordinated cross-functional squad of 10 across product, data, and engineering.</p>
+        <div class="case-metrics">
+          <div class="metric">
+            <div class="metric-val">40%</div>
+            <div class="metric-label">User Retention</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">70%</div>
+            <div class="metric-label">Velocity Boost</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">95%</div>
+            <div class="metric-label">On-time Rate</div>
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleCase(this)">View Details ↓</button>
+        <div class="case-detail">
+          <div class="detail-grid">
+            <div class="detail-box">
+              <h4>Problem</h4>
+              <p>Fragmented product team, inconsistent delivery, high churn rate. No standardized agile process across squads.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Action</h4>
+              <p>Implemented structured sprint planning, backlog prioritization framework, and data-driven roadmap. Introduced weekly metrics review cadence.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Result</h4>
+              <p>40% user retention increase. Team velocity improved 70%. Maintained 95% on-time delivery over 4 years. Platform achieved #1 SEO ranking for target keywords.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="case reveal">
-    <div class="tag">AI Product · Atlassian Forge</div>
-    <h3>Building Backlog Buddy — AI-Powered Jira Health Tool</h3>
-    <p>Independently conceptualized, designed, and built an AI-powered Jira app using Atlassian Forge. Integrated LLM logic to automate ticket quality scoring, detect stale issues, guard deadlines, and monitor project health — demonstrating hands-on technical PM experience and AI literacy.</p>
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-val">0→1</div>
-        <div class="metric-label">Solo Build</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val">AI</div>
-        <div class="metric-label">Powered</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val">Live</div>
-        <div class="metric-label">Marketplace</div>
+    <!-- Case 2 -->
+    <div class="case reveal">
+      <div class="case-num">02</div>
+      <div>
+        <div class="case-tag">AI Product · Atlassian Forge</div>
+        <h3>Building Backlog Buddy — AI-Powered Jira Health Tool</h3>
+        <p class="case-desc">Independently conceptualized, designed, and built an AI-powered Jira app using Atlassian Forge. Integrated LLM logic for automated ticket quality scoring and sprint health monitoring. Currently under marketplace review.</p>
+        <div class="case-metrics">
+          <div class="metric">
+            <div class="metric-val">0→1</div>
+            <div class="metric-label">Solo Build</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">AI</div>
+            <div class="metric-label">Quality Scoring</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">$5</div>
+            <div class="metric-label">Target Price/user</div>
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleCase(this)">View Details ↓</button>
+        <div class="case-detail">
+          <div class="detail-grid">
+            <div class="detail-box">
+              <h4>Problem</h4>
+              <p>Engineering teams waste hours managing stale tickets, unclear priorities, and unhealthy backlogs. No lightweight tool for PM-led backlog health.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Action</h4>
+              <p>Built Backlog Buddy on Atlassian Forge: stale detection (3/7/14d), AI quality scoring (0–100), Deadline Guard, auto-ping assignee, project health score.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Result</h4>
+              <p>Fully functional app ready for Marketplace submission. Demonstrates founder mindset, AI product literacy, and technical PM execution.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="case reveal">
-    <div class="tag">Digital Products · Gumroad</div>
-    <h3>Launching a PM Digital Product Suite</h3>
-    <p>Identified market gap for PM practitioners in Indonesia. Conceptualized, built, and launched 3 digital products targeting product managers — PM Prompt Pack ($5), Dev-PM Translation Kit ($15), and Dev Team OS for PM Notion Template ($10). Zero external cost, pure lean execution.</p>
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-val">3</div>
-        <div class="metric-label">Products Live</div>
+    <!-- Case 3 -->
+    <div class="case reveal">
+      <div class="case-num">03</div>
+      <div>
+        <div class="case-tag">Digital Products · Gumroad</div>
+        <h3>Launching a PM Digital Product Suite (3 Products, $0 Budget)</h3>
+        <p class="case-desc">Identified market gap for PM practitioners in Indonesia. Conceptualized, built, and launched 3 digital products targeting product managers.</p>
+        <div class="case-metrics">
+          <div class="metric">
+            <div class="metric-val">3</div>
+            <div class="metric-label">Products Live</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">$0</div>
+            <div class="metric-label">Build Cost</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">Passive</div>
+            <div class="metric-label">Income Stream</div>
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleCase(this)">View Details ↓</button>
+        <div class="case-detail">
+          <div class="detail-grid">
+            <div class="detail-box">
+              <h4>Products</h4>
+              <p>PM Prompt Pack ($5), Dev-PM Translation Kit ($15), Dev Team OS for PM Notion Template ($10). All live on Gumroad.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Process</h4>
+              <p>Market research → Content creation → Copywriting → SEO-optimized listing → Gumroad distribution. Zero external tools cost.</p>
+            </div>
+            <div class="detail-box">
+              <h4>Learning</h4>
+              <p>Validated content-product market fit. Shows ability to ideate, execute, and distribute independently — founder mindset in action.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="metric">
-        <div class="metric-val">$0</div>
-        <div class="metric-label">Startup Cost</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val">Passive</div>
-        <div class="metric-label">Income</div>
-      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPANY LOGOS -->
+<section>
+  <div class="section-label">Organizations</div>
+  <h2 class="section-title reveal">Companies I've worked with</h2>
+  <div class="logos-grid">
+    <div class="logo-card reveal">
+      <img src="campaign-logo.png" alt="Campaign for Good" class="logo-image">
+      <div class="logo-name">Campaign for Good</div>
+    </div>
+    <div class="logo-card reveal">
+      <img src="lembaga-sensor-film.png" alt="Lembaga Sensor Film" class="logo-image">
+      <div class="logo-name">Lembaga Sensor Film</div>
+    </div>
+    <div class="logo-card reveal">
+      <img src="wunderman-thompson.png" alt="Wunderman Thompson" class="logo-image">
+      <div class="logo-name">Wunderman Thompson</div>
+    </div>
+    <div class="logo-card reveal">
+      <img src="bpjs.png" alt="BPJS Ketenagakerjaan" class="logo-image">
+      <div class="logo-name">BPJS Ketenagakerjaan</div>
+    </div>
+    <div class="logo-card reveal">
+      <img src="bri-mobile.png" alt="BRI Mobile" class="logo-image">
+      <div class="logo-name">BRI Mobile</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO LOGOS -->
+<section>
+  <div class="section-label">Products</div>
+  <h2 class="section-title reveal">My Digital Products</h2>
+  <div class="logos-grid">
+    <a href="https://febrian91.gumroad.com/l/wupej" target="_blank" class="logo-card reveal">
+      <img src="pm-prompt-pack.png" alt="PM Prompt Pack" class="logo-image">
+      <div class="logo-name">PM Prompt Pack</div>
+    </a>
+    <a href="https://febrian91.gumroad.com/l/rbbkhz" target="_blank" class="logo-card reveal">
+      <img src="dev-pm-kit.png" alt="Dev-PM Translation Kit" class="logo-image">
+      <div class="logo-name">Dev-PM Translation Kit</div>
+    </a>
+    <a href="https://febrian91.gumroad.com/l/xyzabc" target="_blank" class="logo-card reveal">
+      <img src="dev-team-os.png" alt="Dev Team OS for PM" class="logo-image">
+      <div class="logo-name">Dev Team OS for PM</div>
+    </a>
+    <div class="logo-card reveal">
+      <img src="backlog-buddy.png" alt="Backlog Buddy" class="logo-image">
+      <div class="logo-name">Backlog Buddy</div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section>
-  <div class="section-label reveal">Skills</div>
-  <h2 class="section-title reveal">What I bring</h2>
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title reveal">Core Skills</h2>
   <div class="skills-grid">
-    <div class="skill-group reveal">
-      <h3>Product & Strategy</h3>
+    <div class="skill-box reveal">
+      <div class="skill-icon">⚡</div>
+      <h3>Product Strategy</h3>
       <ul class="skill-list">
-        <li>Roadmap planning & prioritization</li>
-        <li>PRD & user story writing</li>
-        <li>Product discovery & research</li>
-        <li>Go-to-market strategy</li>
-        <li>OKR & metrics definition</li>
+        <li>Roadmap Planning & Prioritization</li>
+        <li>PRD & User Story Writing</li>
+        <li>Market Research & Discovery</li>
+        <li>GTM Strategy</li>
+        <li>OKR & Metrics Definition</li>
       </ul>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-box reveal">
+      <div class="skill-icon">🔧</div>
       <h3>Technical Fluency</h3>
       <ul class="skill-list">
         <li>SDLC & Agile/Scrum</li>
-        <li>API design & integration</li>
-        <li>SQL & data analysis</li>
-        <li>Atlassian Forge app development</li>
-        <li>AI/LLM feature implementation</li>
+        <li>API Design Understanding</li>
+        <li>SQL & Data Analysis</li>
+        <li>Atlassian Forge (App Dev)</li>
+        <li>AI/LLM Implementation</li>
       </ul>
     </div>
-    <div class="skill-group reveal">
-      <h3>Leadership & Execution</h3>
+    <div class="skill-box reveal">
+      <div class="skill-icon">🤝</div>
+      <h3>Leadership & Delivery</h3>
       <ul class="skill-list">
-        <li>Cross-functional team leadership</li>
-        <li>Stakeholder management</li>
-        <li>Sprint planning & backlog ownership</li>
-        <li>Risk management</li>
-        <li>Distributed team coordination</li>
+        <li>Cross-functional Team Lead</li>
+        <li>Stakeholder Management</li>
+        <li>Sprint Planning & Backlog</li>
+        <li>Risk Management</li>
+        <li>Distributed Team Coordination</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <div class="section-label">Digital Products</div>
+  <h2 class="section-title reveal">Live Products on Gumroad</h2>
+  <div class="products-grid">
+    <a href="https://febrian91.gumroad.com/l/wupej" target="_blank" class="product-card reveal" data-letter="P">
+      <div class="product-tag">Prompt Engineering · $5</div>
+      <h3>PM Prompt Pack</h3>
+      <p>50 AI prompts curated for Product Managers. From PRD writing to stakeholder communication, sprint retrospectives, and competitive analysis.</p>
+      <span class="product-badge">50 Prompts</span>
+      <span class="product-badge">PDF Format</span>
+      <span class="product-badge">Instant Download</span>
+    </a>
+    <a href="https://febrian91.gumroad.com/l/rbbkhz" target="_blank" class="product-card reveal" data-letter="D">
+      <div class="product-tag">Communication Toolkit · $15</div>
+      <h3>Dev-PM Translation Kit</h3>
+      <p>Bridge the communication gap between Product and Engineering. Templates, glossaries, and frameworks for effective cross-functional collaboration.</p>
+      <span class="product-badge">PDF + DOCX</span>
+      <span class="product-badge">Templates</span>
+      <span class="product-badge">Ready-to-use</span>
+    </a>
+    <a href="https://febrian91.gumroad.com/l/xyzabc" target="_blank" class="product-card reveal" data-letter="N">
+      <div class="product-tag">Notion Template · $10</div>
+      <h3>Dev Team OS for PM</h3>
+      <p>A complete Notion workspace for PMs managing engineering teams. Sprint tracking, backlog management, and team documentation — all in one place.</p>
+      <span class="product-badge">Notion Template</span>
+      <span class="product-badge">Sprint Ready</span>
+      <span class="product-badge">Team Ready</span>
+    </a>
+    <div class="product-card reveal" data-letter="B">
+      <div class="product-tag">Atlassian Forge App · Under Review</div>
+      <h3>Backlog Buddy</h3>
+      <p>AI-powered Jira app that scores ticket quality, detects stale issues, guards deadlines, and maintains project health scores automatically.</p>
+      <span class="product-badge">Jira App</span>
+      <span class="product-badge">AI-Powered</span>
+      <span class="product-badge">$2-5/user/mo</span>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section>
-  <div class="section-label reveal">Career</div>
+  <div class="section-label">Career</div>
   <h2 class="section-title reveal">Experience</h2>
   <div class="timeline">
     <div class="timeline-item reveal">
       <div class="timeline-date">Mar 2022 — Mar 2026</div>
       <h3>Senior Product Manager</h3>
       <div class="timeline-company">Campaign for Good Pte. Ltd. · Singapore</div>
-      <p class="timeline-desc">Led cross-functional squad of 10. Managed end-to-end delivery of multi-platform SaaS. Improved retention 40%, velocity 70%, maintained 95% on-time delivery rate.</p>
+      <p class="timeline-desc">Led cross-functional squad of 10 across product, data, and engineering. Managed end-to-end delivery of multi-platform SaaS. Improved retention 40%, velocity 70%, maintained 95% on-time delivery.</p>
     </div>
     <div class="timeline-item reveal">
       <div class="timeline-date">Aug 2021 — Oct 2021</div>
       <h3>Project Manager</h3>
       <div class="timeline-company">Wunderman Thompson Indonesia</div>
-      <p class="timeline-desc">Managed high-profile digital projects for Dancow and Purina. Maintained 90% on-time delivery using Agile/Scrum methodologies.</p>
+      <p class="timeline-desc">Managed high-profile digital projects for Dancow and Purina. Maintained 90% on-time delivery using Agile/Scrum with Smartsheet and Jira.</p>
     </div>
     <div class="timeline-item reveal">
       <div class="timeline-date">Aug 2015 — Sept 2019</div>
-      <h3>Founder & Product Manager</h3>
-      <div class="timeline-company">ButuhDekat</div>
-      <p class="timeline-desc">Conceptualized and launched online grocery platform. Led market research, value proposition design, and operational setup. Reduced overhead 80% through preventive maintenance strategies.</p>
+      <h3>Product Manager · Founder</h3>
+      <div class="timeline-company">ButuhDekat (Own Product)</div>
+      <p class="timeline-desc">Conceptualized and launched an online grocery platform. Led market research, value proposition design, and operational setup. Reduced overhead 80% via preventive maintenance strategies.</p>
     </div>
     <div class="timeline-item reveal">
       <div class="timeline-date">2018 — 2022</div>
@@ -584,58 +1024,107 @@
       <div class="timeline-company">SBM ITB · Bina Nusantara University</div>
       <p class="timeline-desc">Business & Entrepreneurship Mentor at SBM ITB. Contract Lecturer in Digital Marketing at Binus University.</p>
     </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">Aug 2014 — Mar 2022</div>
+      <h3>Project Manager</h3>
+      <div class="timeline-company">Freelance · Digital Agencies</div>
+      <p class="timeline-desc">Led 10+ web projects for BRI, BPJS, Save The Children. Managed budgets and delivered within 90% of allocated cost.</p>
+    </div>
   </div>
 </section>
 
 <!-- EDUCATION -->
 <section>
-  <div class="section-label reveal">Education</div>
-  <h2 class="section-title reveal">Academic background</h2>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-date">2017</div>
+  <div class="section-label">Education</div>
+  <h2 class="section-title reveal">Academic Background</h2>
+  <div class="skills-grid">
+    <div class="skill-box reveal">
+      <div class="skill-icon">🎓</div>
       <h3>MBA with Distinction</h3>
-      <div class="timeline-company">Institut Teknologi Bandung (ITB)</div>
-      <p class="timeline-desc">GPA: 3.68 / 4.00 · Medium of instruction: English</p>
+      <ul class="skill-list">
+        <li>Institut Teknologi Bandung (ITB)</li>
+        <li>GPA: 3.68 / 4.00</li>
+        <li>Medium of instruction: English</li>
+        <li>2017</li>
+      </ul>
     </div>
-    <div class="timeline-item reveal">
-      <div class="timeline-date">2013</div>
+    <div class="skill-box reveal">
+      <div class="skill-icon">💻</div>
       <h3>Bachelor of IT Engineering</h3>
-      <div class="timeline-company">Telkom University</div>
-      <p class="timeline-desc">Foundation in software development and systems architecture.</p>
+      <ul class="skill-list">
+        <li>Telkom University</li>
+        <li>2013</li>
+      </ul>
+    </div>
+    <div class="skill-box reveal">
+      <div class="skill-icon">🏆</div>
+      <h3>Awards & Recognition</h3>
+      <ul class="skill-list">
+        <li>Gold Award Appcelerate — Lintasarta (2016)</li>
+        <li>Top 8 Facebook Developer Challenge (2016)</li>
+        <li>Top 25 Swiss Innovation Challenge (2017)</li>
+        <li>Runner-Up Ideapreneur (2017)</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <h2>Let's work together</h2>
-  <div class="footer-links">
-    <a href="mailto:febriantomulyawan91@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/febrianto-mulyawan" target="_blank">LinkedIn</a>
-    <a href="tel:+6281291985208">WhatsApp</a>
+  <h2>Let's <span>Work</span><br>Together.</h2>
+  <div>
+    <div class="footer-links">
+      <a href="mailto:febriantomulyawan91@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/febrianto-mulyawan" target="_blank">LinkedIn</a>
+      <a href="tel:+6281291985208">WhatsApp</a>
+    </div>
+    <p style="color: #333; font-size: 12px; margin-top: 16px; text-align: right;">Bandung, Indonesia · Open to Remote & Hybrid</p>
   </div>
-  <p>Bandung, Indonesia · Open to remote & hybrid opportunities</p>
 </footer>
 
-<script>
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">🌙</button>
 
-reveals.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(el);
-});
+<script>
+  // Theme toggle
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    const btn = document.querySelector('.theme-toggle');
+    btn.textContent = next === 'dark' ? '🌙' : '☀️';
+  }
+
+  // Load saved theme
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  const btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = saved === 'dark' ? '🌙' : '☀️';
+
+  // Toggle case detail
+  function toggleCase(btn) {
+    const detail = btn.nextElementSibling;
+    const isOpen = detail.classList.contains('open');
+    detail.classList.toggle('open');
+    btn.textContent = isOpen ? 'View Details ↓' : 'Close Details ↑';
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
 </script>
 
 </body>
