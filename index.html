@@ -72,6 +72,18 @@
     padding: 80px 60px;
     position: relative;
     border-bottom: 1px solid #1f1f1f;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  #hero-canvas {
+    z-index: 1;
+    opacity: 0.7;
   }
 
   .hero::before {
@@ -208,6 +220,19 @@
     gap: 48px;
     transition: background 0.3s ease;
     cursor: default;
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .case:hover {
+    background: #1a1a1a;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(200, 114, 42, 0.15);
+  }
+
+  [data-theme="light"] .case:hover {
+    background: #f5f5f5;
+    box-shadow: 0 20px 60px rgba(42, 92, 138, 0.08);
   }
 
   .case-image {
@@ -352,7 +377,7 @@
     background: #1a1a1a;
     padding: 32px 24px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 1px solid #333;
     display: flex;
     flex-direction: column;
@@ -361,15 +386,22 @@
     min-height: 140px;
     text-decoration: none;
     color: inherit;
+    border-radius: 8px;
   }
 
   a.logo-card:hover {
     background: #222;
     text-decoration: none;
+    transform: scale(1.08) translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 48px rgba(200, 114, 42, 0.25);
   }
 
   .logo-card:hover {
     background: #222;
+    transform: scale(1.08) translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 48px rgba(200, 114, 42, 0.25);
   }
 
   [data-theme="light"] .logo-card {
@@ -379,6 +411,9 @@
 
   [data-theme="light"] .logo-card:hover {
     background: #f0f0f0;
+    transform: scale(1.08) translateY(-6px);
+    border-color: var(--accent2);
+    box-shadow: 0 16px 48px rgba(42, 92, 138, 0.15);
   }
 
   .logo-placeholder {
@@ -437,12 +472,40 @@
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 24px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transition: left 0.4s ease;
+    z-index: -1;
   }
 
   .toggle-btn:hover {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--white);
+    box-shadow: 0 8px 24px rgba(200, 114, 42, 0.3);
+  }
+
+  .toggle-btn:hover::before {
+    left: 0;
+  }
+
+  [data-theme="light"] .toggle-btn:hover {
+    color: var(--white);
+    box-shadow: 0 8px 24px rgba(42, 92, 138, 0.2);
+  }
+
+  [data-theme="light"] .toggle-btn::before {
+    background: var(--accent2);
   }
 
   /* SKILLS */
@@ -509,30 +572,62 @@
     padding: 48px;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: block;
     text-decoration: none;
     color: inherit;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
   }
 
   a.product-card:hover {
     background: #151515;
     text-decoration: none;
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 60px rgba(200, 114, 42, 0.2);
   }
 
   .product-card:hover {
     background: #151515;
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 60px rgba(200, 114, 42, 0.2);
   }
 
   [data-theme="light"] .product-card {
     background: #f8f8f8;
+    border-color: #e8e8e8;
   }
 
   [data-theme="light"] .product-card:hover {
     background: #f0f0f0;
+    transform: translateY(-8px);
+    border-color: var(--accent2);
+    box-shadow: 0 20px 60px rgba(42, 92, 138, 0.15);
   }
 
   .product-card::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: all 0.5s;
+  }
+
+  .product-card:hover::before {
+    top: 0;
+    left: 0;
+    animation: shine 0.5s ease-in-out;
+  }
+
+  @keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
+  }
     content: attr(data-letter);
     position: absolute;
     right: -10px;
@@ -784,36 +879,39 @@
   }
 </style>
 </head>
-<body data-theme="light">
+<body>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">Product Manager · Bandung, Indonesia</div>
-  <h1>Febrianto<br><span>Mulyawan</span></h1>
-  <div class="hero-sub">10+ Years Building Digital Products</div>
-  <p class="hero-desc">Senior PM bridging business strategy and technical execution. Specializing in digital platforms, AI-powered tools, and cross-functional delivery across Southeast Asia.</p>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">10+</div>
-      <div class="stat-label">Years Experience</div>
+  <canvas id="hero-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">Product Manager · Bandung, Indonesia</div>
+    <h1>Febrianto<br><span>Mulyawan</span></h1>
+    <div class="hero-sub">10+ Years Building Digital Products</div>
+    <p class="hero-desc">Senior PM bridging business strategy and technical execution. Specializing in digital platforms, AI-powered tools, and cross-functional delivery across Southeast Asia.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">40%</div>
+        <div class="stat-label">User Retention Lift</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">70%</div>
+        <div class="stat-label">Velocity Improvement</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">95%</div>
+        <div class="stat-label">On-time Delivery</div>
+      </div>
     </div>
-    <div class="stat">
-      <div class="stat-num">40%</div>
-      <div class="stat-label">User Retention Lift</div>
+    <div class="hero-contact">
+      <div>febriantomulyawan91@gmail.com</div>
+      <div>+62 812 9198 5208</div>
+      <div><a href="https://www.linkedin.com/in/febrianto-mulyawan-a58299a7/" target="_blank">LinkedIn ↗</a></div>
     </div>
-    <div class="stat">
-      <div class="stat-num">70%</div>
-      <div class="stat-label">Velocity Improvement</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">95%</div>
-      <div class="stat-label">On-time Delivery</div>
-    </div>
-  </div>
-  <div class="hero-contact">
-    <div>febriantomulyawan91@gmail.com</div>
-    <div>+62 812 9198 5208</div>
-    <div><a href="https://www.linkedin.com/in/febrianto-mulyawan-a58299a7/" target="_blank">LinkedIn ↗</a></div>
   </div>
 </section>
 
@@ -1215,6 +1313,201 @@
   }, { threshold: 0.1 });
 
   reveals.forEach(el => observer.observe(el));
+
+  // ADVANCED THREE.JS HERO ANIMATION
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d', { alpha: true });
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+    
+    // 3D Orbs
+    class Orb {
+      constructor(x, y, z, radius, color) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.radius = radius;
+        this.color = color;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = (Math.random() - 0.5) * 2;
+        this.vz = (Math.random() - 0.5) * 2;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.02 + 0.01;
+      }
+      
+      update(time) {
+        this.angle += this.speed;
+        
+        // Circular motion
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const orbitRadius = 200 + Math.sin(time * 0.001) * 50;
+        
+        this.x = centerX + Math.cos(this.angle) * orbitRadius;
+        this.y = centerY + Math.sin(this.angle) * orbitRadius + Math.sin(time * 0.001) * 80;
+        this.z = Math.sin(this.angle * 0.5) * 100;
+      }
+      
+      draw(ctx, depth) {
+        const scale = (depth + 200) / 400;
+        const screenRadius = this.radius * scale;
+        
+        // Glow effect
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, screenRadius);
+        gradient.addColorStop(0, this.color.replace(')', ', 0.8)').replace('rgb', 'rgba'));
+        gradient.addColorStop(0.5, this.color.replace(')', ', 0.3)').replace('rgb', 'rgba'));
+        gradient.addColorStop(1, this.color.replace(')', ', 0)').replace('rgb', 'rgba'));
+        
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, screenRadius, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Core
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, screenRadius * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    // Wave mesh
+    class WaveMesh {
+      constructor(width, height, cellSize) {
+        this.width = width;
+        this.height = height;
+        this.cellSize = cellSize;
+        this.cols = Math.ceil(width / cellSize);
+        this.rows = Math.ceil(height / cellSize);
+        this.waves = Array(this.cols * this.rows).fill(0);
+      }
+      
+      update(time) {
+        for (let i = 0; i < this.waves.length; i++) {
+          const col = i % this.cols;
+          const row = Math.floor(i / this.cols);
+          const dx = col * this.cellSize - this.width / 2;
+          const dy = row * this.cellSize - this.height / 2;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          this.waves[i] = Math.sin(dist * 0.01 - time * 0.002) * 15;
+        }
+      }
+      
+      draw(ctx, isDark) {
+        ctx.strokeStyle = isDark ? 'rgba(200, 114, 42, 0.15)' : 'rgba(42, 92, 138, 0.1)';
+        ctx.lineWidth = 1;
+        
+        for (let row = 0; row < this.rows - 1; row++) {
+          for (let col = 0; col < this.cols - 1; col++) {
+            const x = col * this.cellSize;
+            const y = row * this.cellSize;
+            const idx = row * this.cols + col;
+            
+            const h1 = this.waves[idx];
+            const h2 = this.waves[idx + 1];
+            const h3 = this.waves[(row + 1) * this.cols + col];
+            const h4 = this.waves[(row + 1) * this.cols + col + 1];
+            
+            // Vertical line
+            ctx.beginPath();
+            ctx.moveTo(x, y + h1);
+            ctx.lineTo(x + this.cellSize, y + h2);
+            ctx.stroke();
+            
+            // Horizontal line
+            ctx.beginPath();
+            ctx.moveTo(x, y + h1);
+            ctx.lineTo(x, y + this.cellSize + h3);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    // Initialize
+    const orbs = [
+      new Orb(0, 0, 0, 60, 'rgb(200, 114, 42)'),
+      new Orb(0, 0, 0, 40, 'rgb(42, 92, 138)'),
+      new Orb(0, 0, 0, 30, 'rgb(200, 114, 42)'),
+    ];
+    
+    const mesh = new WaveMesh(canvas.width, canvas.height, 40);
+    
+    let time = 0;
+    function animate() {
+      time++;
+      const dark = isDark();
+      
+      // Clear background
+      const bgColor = dark ? '#0a0a0a' : '#ffffff';
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Animated gradient overlay
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      const hue = (time * 0.5) % 360;
+      
+      if (dark) {
+        gradient.addColorStop(0, `hsla(${hue}, 80%, 25%, 0.08)`);
+        gradient.addColorStop(0.5, `hsla(${hue + 120}, 80%, 20%, 0.06)`);
+        gradient.addColorStop(1, `hsla(${hue + 240}, 80%, 30%, 0.08)`);
+      } else {
+        gradient.addColorStop(0, `hsla(${hue}, 80%, 90%, 0.1)`);
+        gradient.addColorStop(0.5, `hsla(${hue + 120}, 80%, 95%, 0.08)`);
+        gradient.addColorStop(1, `hsla(${hue + 240}, 80%, 85%, 0.1)`);
+      }
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw wave mesh
+      mesh.update(time);
+      mesh.draw(ctx, dark);
+      
+      // Update and draw orbs
+      orbs.forEach(orb => {
+        orb.update(time);
+        orb.draw(ctx, orb.z);
+      });
+      
+      // Sort by depth and redraw in order
+      orbs.sort((a, b) => a.z - b.z);
+      orbs.forEach(orb => orb.draw(ctx, orb.z));
+      
+      // Floating particles
+      for (let i = 0; i < 20; i++) {
+        const x = (time * 0.3 + i * Math.PI * 2 / 20) % (canvas.width * 2) - canvas.width / 2;
+        const y = canvas.height * 0.3 + Math.sin(time * 0.002 + i) * 100;
+        const size = Math.sin(time * 0.005 + i) * 2 + 3;
+        const particleColor = dark ? 'rgba(200, 114, 42, 0.4)' : 'rgba(42, 92, 138, 0.3)';
+        
+        ctx.fillStyle = particleColor;
+        ctx.beginPath();
+        ctx.arc(x + canvas.width / 2, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Resize handler
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      mesh.width = canvas.width;
+      mesh.height = canvas.height;
+      mesh.cols = Math.ceil(canvas.width / mesh.cellSize);
+      mesh.rows = Math.ceil(canvas.height / mesh.cellSize);
+      mesh.waves = Array(mesh.cols * mesh.rows).fill(0);
+    });
+  })();
 </script>
 
 </body>
