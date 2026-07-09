@@ -171,6 +171,12 @@
   .hero-contact a {
     color: var(--accent);
     text-decoration: none;
+    transition: opacity 0.3s ease, text-decoration-color 0.3s ease;
+  }
+
+  .hero-contact a:hover {
+    text-decoration: underline;
+    opacity: 0.75;
   }
 
   /* SECTION */
@@ -387,6 +393,52 @@
     text-decoration: none;
     color: inherit;
     border-radius: 8px;
+    position: relative;
+  }
+
+  /* CLICKABLE INDICATOR — always visible so touch users see it's a link too, not just on hover */
+  .link-indicator {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--gray);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 2;
+  }
+
+  a.logo-card .link-indicator,
+  a.product-card .link-indicator {
+    opacity: 0.7;
+  }
+
+  a.logo-card:hover .link-indicator,
+  a.product-card:hover .link-indicator {
+    opacity: 1;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--black);
+    transform: rotate(45deg) scale(1.1);
+  }
+
+  [data-theme="light"] .link-indicator {
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.1);
+  }
+
+  [data-theme="light"] a.logo-card:hover .link-indicator,
+  [data-theme="light"] a.product-card:hover .link-indicator {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: var(--white);
   }
 
   a.logo-card:hover {
@@ -628,6 +680,8 @@
     0% { transform: translateX(-100%) translateY(-100%); }
     100% { transform: translateX(100%) translateY(100%); }
   }
+
+  .product-card::after {
     content: attr(data-letter);
     position: absolute;
     right: -10px;
@@ -638,17 +692,19 @@
     color: #151515;
     line-height: 1;
     transition: color 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
   }
 
-  [data-theme="light"] .product-card::before {
+  [data-theme="light"] .product-card::after {
     color: #f0f0f0;
   }
 
-  .product-card:hover::before {
+  .product-card:hover::after {
     color: #1a1a1a;
   }
 
-  [data-theme="light"] .product-card:hover::before {
+  [data-theme="light"] .product-card:hover::after {
     color: #e0e0e0;
   }
 
@@ -1084,18 +1140,22 @@
   <h2 class="section-title reveal">My Digital Products</h2>
   <div class="logos-grid">
     <a href="https://campaign.com" target="_blank" class="logo-card reveal">
+      <span class="link-indicator">↗</span>
       <img src="Campaign_Website.png" alt="Campaign for Good" class="logo-image">
       <div class="logo-name">Campaign Website</div>
     </a>
     <a href="https://app.campaign.com" target="_blank" class="logo-card reveal">
+      <span class="link-indicator">↗</span>
       <img src="Campaign_mobile.png" alt="Campaign for Good" class="logo-image">
       <div class="logo-name">Campaign Mobile</div>
     </a>
     <a href="https://lsf.go.id" target="_blank" class="logo-card reveal">
+      <span class="link-indicator">↗</span>
       <img src="LSF_Website.png" alt="LSF Website" class="logo-image">
       <div class="logo-name">LSF Website</div>
     </a>
     <a href="https://tumbuhbersama.campaign.com" target="_blank" class="logo-card reveal">
+      <span class="link-indicator">↗</span>
       <img src="Microsite _TumbuhBersama.png" alt="Tumbuh Bersama" class="logo-image">
       <div class="logo-name">Microsite Tumbuh Bersama</div>
     </a>
@@ -1149,6 +1209,7 @@
   <h2 class="section-title reveal">Live Products</h2>
   <div class="products-grid">
     <a href="https://agencyos.voxra.id" target="_blank" class="product-card reveal" data-letter="A">
+      <span class="link-indicator">↗</span>
       <div class="product-tag">B2B SaaS · Live Demo</div>
       <h3>AgencyOS</h3>
       <p>Client portal & project management for Indonesian agencies. Documented approvals with printable audit trail, revision-limit guard, and PPh 23-ready invoicing generated from billable hours.</p>
@@ -1156,15 +1217,17 @@
       <span class="product-badge">Client Portal</span>
       <span class="product-badge">0→1 Full-stack Build</span>
     </a>
-    <div class="product-card reveal" data-letter="B">
-      <div class="product-tag">Atlassian Forge App · Under Review</div>
+    <a href="https://marketplace.atlassian.com/apps/3379382153/backlog-buddy" target="_blank" class="product-card reveal" data-letter="B">
+      <span class="link-indicator">↗</span>
+      <div class="product-tag">Atlassian Forge App · Live on Marketplace</div>
       <h3>Backlog Buddy</h3>
       <p>AI-powered Jira app that scores ticket quality, detects stale issues, guards deadlines, and maintains project health scores automatically.</p>
       <span class="product-badge">Jira App</span>
       <span class="product-badge">AI-Powered</span>
-      <span class="product-badge">$2-5/user/mo (target)</span>
-    </div>
+      <span class="product-badge">Free</span>
+    </a>
     <a href="https://febrian91.gumroad.com/l/rbbkhz" target="_blank" class="product-card reveal" data-letter="P">
+      <span class="link-indicator">↗</span>
       <div class="product-tag">Prompt Engineering · $5</div>
       <h3>PM Prompt Pack</h3>
       <p>50 AI prompts curated for Product Managers. From PRD writing to stakeholder communication, sprint retrospectives, and competitive analysis.</p>
@@ -1173,6 +1236,7 @@
       <span class="product-badge">Instant Download</span>
     </a>
     <a href="https://febrian91.gumroad.com/l/wupej" target="_blank" class="product-card reveal" data-letter="D">
+      <span class="link-indicator">↗</span>
       <div class="product-tag">Communication Toolkit · $10</div>
       <h3>Dev-PM Translation Kit</h3>
       <p>Bridge the communication gap between Product and Engineering. Templates, glossaries, and frameworks for effective cross-functional collaboration.</p>
@@ -1181,6 +1245,7 @@
       <span class="product-badge">Ready-to-use</span>
     </a>
     <a href="https://febriantomulyawan.notion.site/Dev-Team-OS-for-Product-Managers-34e08af31cb78070affaec4d63c1667f?source=copy_link" target="_blank" class="product-card reveal" data-letter="N">
+      <span class="link-indicator">↗</span>
       <div class="product-tag">Notion Template · Free</div>
       <h3>Dev Team OS for PM</h3>
       <p>A complete Notion workspace for PMs managing engineering teams. Sprint tracking, backlog management, and team documentation — all in one place.</p>
